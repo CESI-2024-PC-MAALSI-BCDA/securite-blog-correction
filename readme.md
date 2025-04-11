@@ -32,7 +32,13 @@ Ce projet est une application PHP orientée objet volontairement vulnérable. Il
 - Nom : `securite_blog`
 - Importer le fichier `script.sql` inclus dans le projet, via phpMyAdmin ou ligne de commande.
 
-4. **Lancer le projet :**
+4. **Installer les dépendances avec Composer :**
+
+Depuis la racine du projet :
+> `composer install`
+
+
+5. **Lancer le projet :**
 
 Démarrer Apache et MySQL depuis XAMPP/MAMP puis ouvrir dans votre navigateur :
 http://localhost/securite-blog/
@@ -103,8 +109,7 @@ Vous pouvez utiliser des outils de test d’intrusion, des dictionnaires, ou l'i
 
 Projet conçu et maintenu par [Julien Grade](https://github.com/JulienGrade)
 
-Formateur / Développeur freelance passionné par la pédagogie, la cybersécurité et les projets propres.
-
+Formateur / Développeur freelance 
 ---
 
 ## 📬 Contact
