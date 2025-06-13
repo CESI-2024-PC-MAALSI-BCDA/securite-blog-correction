@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\config\Database;
 use PDO;
+use PDOException;
 
 class User
 {
@@ -14,7 +15,7 @@ class User
         $this->db = Database::getConnection();
     }
 
-    public function create($username, $password)
+    public function create($username, $password): void
     {
         $hashed = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
@@ -40,9 +41,31 @@ class User
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
         $stmt->execute([$id]);
+    }
+
+    public function createWithRole(string $username, string $password, string $role = 'user'): bool
+    {
+        try {
+            $hashed = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $this->db->prepare(
+                "INSERT INTO users (username, password, role) VALUES (:u, :p, :r)"
+            );
+            return $stmt->execute([
+                'u' => $username,
+                'p' => $hashed,
+                'r' => $role
+            ]);
+        } catch (PDOException $e) {
+
+            if ($e->getCode() === '23000') {
+                return false;
+            }
+            error_log("User::createWithRole error [{$e->getCode()}]: {$e->getMessage()}");
+            return false;
+        }
     }
 }

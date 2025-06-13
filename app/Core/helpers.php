@@ -10,8 +10,7 @@ function base_url($path = ''): string
     $dir = str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']);
     return $protocol . $host . $dir . '/' . ltrim($path, '/');
 }
-
-function set_flash($type, $message)
+function set_flash($type, $message): void
 {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();

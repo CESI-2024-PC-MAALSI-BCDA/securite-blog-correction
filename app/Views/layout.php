@@ -8,7 +8,7 @@
 <body class="bg-gray-50 text-gray-800">
 <!-- Navbar -->
 <nav class="bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <div class="mx-auto px-6 py-5 flex justify-between items-center">
         <div class="flex gap-8 items-center">
             <a href="<?= base_url() ?>" class="text-2xl font-extrabold text-blue-700 hover:text-blue-900">SécuBlog</a>
             <a href="<?= base_url() ?>" class="text-lg text-gray-700 hover:text-blue-600 transition">Accueil</a>

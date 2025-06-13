@@ -7,7 +7,7 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function dashboard()
+    public function dashboard(): void
     {
         if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             set_flash('error', 'Accès réservé aux administrateurs.');
@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
 
 
-    public function users()
+    public function users(): void
     {
         if (empty($_SESSION['user'])) {
             set_flash('error', 'Accès réservé. Connectez-vous.');
@@ -31,7 +31,7 @@ class AdminController extends Controller
         $this->render('admin/users', ['users' => $users]);
     }
 
-    public function createUser()
+    public function createUser(): void
     {
         if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             set_flash('error', 'Accès réservé aux administrateurs.');
@@ -42,15 +42,19 @@ class AdminController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
-            $role = $_POST['role'] ?? 'user'; // "admin" possible
+            $role = $_POST['role'] ?? 'user';
 
             if ($username && $password) {
-                $user = new \App\Models\User();
-                $user->createWithRole($username, $password, $role);
+                $userModel = new User();
+                $ok = $userModel->createWithRole($username, $password, $role);
 
-                set_flash('success', "Utilisateur '$username' créé avec succès !");
-                header(REDIRECT_HEADER . base_url('admin/users'));
-                exit;
+                if ($ok) {
+                    set_flash('success', "Utilisateur '$username' créé avec succès !");
+                    header(REDIRECT_HEADER . base_url('admin/users'));
+                    exit;
+                } else {
+                    set_flash('error', "Le nom d'utilisateur '$username' existe déjà.");
+                }
             } else {
                 set_flash('error', 'Tous les champs sont requis.');
             }

@@ -1,5 +1,12 @@
+# active le moteur de réécriture
 RewriteEngine On
-RewriteBase /formation/securite/securite-blog/
+
+# base de réécriture = racine du site
+RewriteBase /
+
+# si la ressource demandée existe en fichier ou dossier, on la sert directement
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# sinon, on redirige tout vers index.php en passant l'URL dans ?url=
+RewriteRule ^ index.php?url=$1 [QSA,L]

@@ -13,10 +13,24 @@ class Database
     {
         if (!self::$instance) {
             try {
-                self::$instance = new PDO('mysql:host=localhost;dbname=securite_blog;charset=utf8', 'root', '');
-                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                // 1) Modifiez ici pour vos infos IONOS
+                $host   = 'db5018028413.hosting-data.io';
+                $db     = 'hackme';
+                $user   = 'dbu2417985';
+                $pass   = 'Micromania.21';
+                $charset= 'utf8mb4';
+
+                $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+                self::$instance = new PDO($dsn, $user, $pass, [
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES   => false,
+                ]);
             } catch (PDOException $e) {
-                die('Erreur de connexion : ' . $e->getMessage());
+                // En prod, on ne meurt pas en affichant le message brut :
+                error_log('DB Connection Error: ' . $e->getMessage());
+                // Affichez un erreur générique à l’écran
+                die('Impossible de se connecter à la base de données.');
             }
         }
         return self::$instance;

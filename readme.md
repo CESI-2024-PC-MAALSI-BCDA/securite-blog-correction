@@ -38,14 +38,14 @@ Depuis la racine du projet :
 > `composer install`
 
 
-5. **Lancer le projet :**
+5. **Lancer le projet et configurer le .htaccess :**
 
 Démarrer Apache et MySQL depuis XAMPP/MAMP puis ouvrir dans votre navigateur :
 http://localhost/securite-blog/
 A adapter selon votre architecture de dossier.
 
 > Le fichier `.htaccess` est déjà configuré pour rediriger les URLs propres. Assurez-vous que `mod_rewrite` est activé.
-
+Il faudra penser tout de même à configurer le .htaccess selon le chemin menant à votre projet correspondant à votre htdocs
 ---
 
 ## 🎓 Objectif pédagogique

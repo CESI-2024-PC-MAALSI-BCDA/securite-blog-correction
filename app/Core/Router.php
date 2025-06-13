@@ -4,15 +4,18 @@ namespace App\Core;
 
 class Router
 {
-    public function handleRequest()
+    public function handleRequest(): void
     {
         $uri = $_GET['url'] ?? 'home';
-
         $parts = explode('/', trim($uri, '/'));
-        $controllerName = ucfirst($parts[0]) . 'Controller';
-        $method = $parts[1] ?? 'index';
 
+        // Controller
+        $controllerName = ucfirst($parts[0]) . 'Controller';
         $controllerClass = "App\\Controllers\\$controllerName";
+
+        // Méthode transformée en camelCase
+        $rawMethod = $parts[1] ?? 'index';
+        $method    = $this->toCamelCase($rawMethod);
 
         if (class_exists($controllerClass)) {
             $controller = new $controllerClass();
@@ -24,5 +27,21 @@ class Router
 
         http_response_code(404);
         echo "404 - Page not found";
+    }
+
+    /**
+     * Convertit une chaîne en camelCase:
+     *   'create-user'  → 'createUser'
+     *   'edit-article' → 'editArticle'
+     */
+    private function toCamelCase(string $str): string
+    {
+        return preg_replace_callback(
+            '/-([a-z])/',
+            function ($matches) {
+                return strtoupper($matches[1]);
+            },
+            $str
+        );
     }
 }

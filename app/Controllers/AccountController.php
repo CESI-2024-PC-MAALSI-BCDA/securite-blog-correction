@@ -4,10 +4,12 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\User;
+use JetBrains\PhpStorm\NoReturn;
 
 class AccountController extends Controller
 {
-    public function delete()
+    #[NoReturn]
+    public function delete(): void
     {
         $id = $_GET['id'] ?? null;
 
@@ -18,7 +20,7 @@ class AccountController extends Controller
         }
 
         $user = new User();
-        $user->delete($id); // ❌ aucune vérif que c'est le bon utilisateur
+        $user->delete($id);
 
         set_flash('success', "Compte supprimé avec succès (id $id)");
         header(REDIRECT_HEADER . base_url());

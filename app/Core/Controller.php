@@ -4,7 +4,7 @@ namespace App\Core;
 
 class Controller
 {
-    protected function render($view, $data = [])
+    protected function render($view, $data = []): void
     {
         extract($data);
         ob_start();
