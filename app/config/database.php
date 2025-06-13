@@ -15,7 +15,7 @@ class Database
             try {
                 // 1) Modifiez ici pour vos infos IONOS
                 $host   = 'db5018028413.hosting-data.io';
-                $db     = 'hackme';
+                $db     = 'dbs14329504';
                 $user   = 'dbu2417985';
                 $pass   = 'Micromania.21';
                 $charset= 'utf8mb4';
