@@ -13,14 +13,14 @@ class Database
     {
         if (!self::$instance) {
             try {
-                // 1) Modifiez ici pour vos infos IONOS
                 $host   = 'db5018028413.hosting-data.io';
+                $port    = 3306;
                 $db     = 'dbs14329504';
                 $user   = 'dbu2417985';
                 $pass   = 'Micromania.21';
                 $charset= 'utf8mb4';
 
-                $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+                $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
                 self::$instance = new PDO($dsn, $user, $pass, [
                     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
