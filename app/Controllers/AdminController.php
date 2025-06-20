@@ -33,13 +33,20 @@ class AdminController extends Controller
 
     public function createUser(): void
     {
-        if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+        if (empty($_SESSION['user']) || $_SESSION['user_role'] !== 'admin') {
             set_flash('error', 'Accès réservé aux administrateurs.');
             header(REDIRECT_HEADER . base_url());
             exit;
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $token = $_POST['csrf_token'] ?? '';
+            if (!verify_csrf_token($token)) {
+                set_flash('error', 'Jeton CSRF invalide.');
+                header(REDIRECT_HEADER . base_url('page/contact'));
+                exit;
+            }
+
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
             $role = $_POST['role'] ?? 'user';

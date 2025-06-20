@@ -30,6 +30,12 @@ class AuthController extends Controller
     {
         $error = null;
 
+        if ($_SESSION['user']) {
+            set_flash('error', 'Vous êtes déjà connecté.');
+            header(REDIRECT_HEADER . base_url());
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
