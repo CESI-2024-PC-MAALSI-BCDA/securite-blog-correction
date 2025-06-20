@@ -79,6 +79,13 @@ class ArticleController extends Controller
             exit;
         }
 
+        // Vérifie l'appartenance de l'article
+        if ($_SESSION['user']['id'] != $data['user_id']) {
+            set_flash('error', 'Impossible de modifier l\'article si vous n\'en êtes pas l\'auteur');
+            header(REDIRECT_HEADER . base_url());
+            exit;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = $_POST['title'] ?? '';
             $content = $_POST['content'] ?? '';
