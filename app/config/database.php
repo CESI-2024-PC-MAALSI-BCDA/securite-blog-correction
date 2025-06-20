@@ -13,11 +13,11 @@ class Database
     {
         if (!self::$instance) {
             try {
-                $host   = 'db5018028413.hosting-data.io';
+                $host   = 'localhost';
                 $port    = 3306;
-                $db     = 'dbs14329504';
-                $user   = 'dbu2417985';
-                $pass   = 'Micromania.21';
+                $db     = 'securiteweb';
+                $user   = 'root';
+                $pass   = 'root';
                 $charset= 'utf8mb4';
 
                 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
