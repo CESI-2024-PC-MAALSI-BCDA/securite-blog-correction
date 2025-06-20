@@ -80,7 +80,7 @@ class ArticleController extends Controller
         }
 
         // Vérifie l'appartenance de l'article
-        if ($_SESSION['user']['id'] != $data['user_id']) {
+        if ($_SESSION['user']['id'] != $id) {
             set_flash('error', 'Impossible de modifier l\'article si vous n\'en êtes pas l\'auteur');
             header(REDIRECT_HEADER . base_url());
             exit;
