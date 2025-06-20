@@ -16,6 +16,13 @@ class ArticleController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $token = $_POST['csrf_token'] ?? '';
+            if (!verify_csrf_token($token)) {
+                set_flash('error', 'Jeton CSRF invalide.');
+                header(REDIRECT_HEADER . base_url('page/contact'));
+                exit;
+            }
+
             $title = htmlspecialchars($_POST['title']) ?? '';
             $content = htmlspecialchars($_POST['content']) ?? '';
             $user_id = $_SESSION['user']['id'];
@@ -87,6 +94,12 @@ class ArticleController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $token = $_POST['csrf_token'] ?? '';
+            if (!verify_csrf_token($token)) {
+                set_flash('error', 'Jeton CSRF invalide.');
+                header(REDIRECT_HEADER . base_url('page/contact'));
+                exit;
+            }
             $title = $_POST['title'] ?? '';
             $content = $_POST['content'] ?? '';
 
