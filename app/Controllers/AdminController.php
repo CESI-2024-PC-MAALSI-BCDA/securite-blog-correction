@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function dashboard(): void
     {
-        if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+        if (empty($_SESSION['user']) || $_SESSION['user_role'] !== 'admin') {
             set_flash('error', 'Accès réservé aux administrateurs.');
             header(REDIRECT_HEADER . base_url());
             exit;
@@ -21,7 +21,7 @@ class AdminController extends Controller
 
     public function users(): void
     {
-        if (empty($_SESSION['user'])) {
+        if (empty($_SESSION['user']) || $_SESSION['user_role'] !== 'admin') {
             set_flash('error', 'Accès réservé. Connectez-vous.');
             header(REDIRECT_HEADER . base_url('auth/login'));
             exit;
