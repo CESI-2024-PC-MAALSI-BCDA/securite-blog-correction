@@ -42,7 +42,8 @@ class AuthController extends Controller
 
             if ($result) {
                 $_SESSION['user'] = $result;
-                setcookie('user_role', $result['role'], time() + 3600, '/');
+                $_SESSION['user_role'] = $result['role'];
+//                setcookie('user_role', $result['role'], time() + 3600, '/');
                 set_flash('success', 'Connexion réussie !');
                 header(REDIRECT_HEADER . base_url());
                 exit;

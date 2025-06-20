@@ -15,9 +15,9 @@ class Database
             try {
                 $host   = 'localhost';
                 $port    = 3306;
-                $db     = 'securiteweb';
+                $db     = 'securite_blog';
                 $user   = 'root';
-                $pass   = 'root';
+                $pass   = '';
                 $charset= 'utf8mb4';
 
                 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";

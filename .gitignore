@@ -1,6 +1,8 @@
 # on bloque les commit des fichiers de config des IDE
 .idea/
 .vscode/
+app/config/database.php
+.htaccess
 # on bloque les commit des fichiers de config de l'OS
 .DS_Store
 # on bloque les commit de composer et de ses dépendances
