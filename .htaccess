@@ -12,6 +12,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # on bloque accès aux .env et .sql s'ils sont malencontreusement mis en prod
-<FilesMatch "^(\.env|\.sql)$">
-    Require all denied
-</FilesMatch>
+RewriteRule ^.*(\.env|\.sql|\.DS_Store)$ - [F,L]
