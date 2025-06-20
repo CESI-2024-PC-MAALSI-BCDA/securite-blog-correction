@@ -16,8 +16,8 @@ class ArticleController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $title = $_POST['title'] ?? '';
-            $content = $_POST['content'] ?? '';
+            $title = htmlspecialchars($_POST['title']) ?? '';
+            $content = htmlspecialchars($_POST['content']) ?? '';
             $user_id = $_SESSION['user']['id'];
 
             if ($title && $content) {
